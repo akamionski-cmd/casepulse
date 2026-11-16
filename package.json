@@ -1,0 +1,7 @@
+{
+  "name": "casepulse",
+  "private": true,
+  "type": "module",
+  "description": "CasePulse by Pointed Discovery: pre-suit claim valuation and The Bench AI arbitration demo",
+  "engines": { "node": ">=20" }
+}
