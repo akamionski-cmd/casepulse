@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CasePulse — Pointed Discovery</title>
+<title>The Bench — by Pointed Discovery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js" defer></script>
@@ -277,12 +277,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
 <body>
 <div class="shell">
   <aside class="rail" aria-label="Main navigation">
-    <div class="brand" data-act="go" data-v="home"><img src="pd-logo-white.svg" alt="Pointed Discovery"><div class="product">CasePulse<small>Claim value and dispute resolution</small></div></div>
+    <div class="brand" data-act="go" data-v="home"><img src="pd-logo-white.svg" alt="Pointed Discovery"><div class="product">The Bench<small>by Pointed Discovery</small></div></div>
     <nav class="navlist" id="nav"></nav>
     <div class="railfoot">Prototype. AI estimates are not guarantees. Card charges are simulated.</div>
   </aside>
   <div class="main">
-    <div class="mobilebar"><img src="pd-logo-white.svg" alt="Pointed Discovery"><b>CasePulse</b></div>
+    <div class="mobilebar"><img src="pd-logo-white.svg" alt="Pointed Discovery"><b>The Bench</b></div>
     <header class="topbar"><h1 id="title"></h1><div class="tools" id="tools"></div></header>
     <main class="content" id="app"></main>
   </div>
@@ -443,7 +443,7 @@ function calc(w){
 }
 function reportText(){
   const r=S.adv.result, c=calc(S.adv.what), st=r.settlement||{};
-  return `CASEPULSE CASE ASSESSMENT — ${new Date().toLocaleDateString()}
+  return `THE BENCH CASE ASSESSMENT — ${new Date().toLocaleDateString()}
 ${r.headline}
 
 ${r.summary}
@@ -511,8 +511,8 @@ const ICON={
   doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/></svg>',
   card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></svg>'
 };
-const NAV=[['home','Overview','overview'],['advisor','Pre-Suit Advisor','gauge'],['adr','The Bench','bench']];
-const TITLES={home:'Overview',advisor:'Pre-Suit Advisor',adr:'The Bench',case:'The Bench'};
+const NAV=[['home','Overview','overview'],['advisor','Pre-Suit Advisor','gauge'],['adr','Bench Ruling','bench']];
+const TITLES={home:'Overview',advisor:'Pre-Suit Advisor',adr:'Bench Ruling',case:'Bench Ruling'};
 const lvlClass=l=>({low:'low',elevated:'mid',high:'high'})[l]||'navy';
 
 /* ============ fields ============ */
@@ -568,9 +568,9 @@ function viewHome(){
   </section>
   <section class="entry">
     <div class="about">
-      <h2>The Bench</h2>
+      <h2>Bench Ruling</h2>
       <p class="mut">Consent-based arbitration decided by AI. Both sides file at the same time, answer the judge's questions and receive a reasoned award. Each dispute is either binding, paid from a card on file up to a cap, or advisory, with the court still open.</p>
-      <button class="btn" data-act="go" data-v="adr">Open The Bench</button>
+      <button class="btn" data-act="go" data-v="adr">Open Bench Ruling</button>
     </div>
     <div class="quick">
       <h4>Run a demo dispute</h4>
@@ -579,7 +579,7 @@ function viewHome(){
     </div>
   </section>
   <section class="sheet">
-    <h3>How a dispute moves through The Bench</h3>
+    <h3>How a dispute moves through Bench Ruling</h3>
     <ol class="steps-ol">
       <li><b>Open</b>The claimant opens a dispute and shares a 6-character invite code.</li>
       <li><b>Consent</b>Both sides choose binding or advisory and sign. Binding requires a card on file and a cap.</li>
@@ -861,7 +861,7 @@ function viewCase(){
 }
 function stagePanel(d, role){
   const s=d.status;
-  if(s==='invited') return `<section class="sheet"><h3>Invite the other side</h3><p class="small">Send them this code. They open CasePulse, go to The Bench and enter it under Join with a code.</p><div class="code">${esc(d.inviteCode)}</div>
+  if(s==='invited') return `<section class="sheet"><h3>Invite the other side</h3><p class="small">Send them this code. They open The Bench, go to Bench Ruling and enter it under Join with a code.</p><div class="code">${esc(d.inviteCode)}</div>
     <div><button class="btn ghost" data-act="copycode" data-c="${esc(d.inviteCode)}">Copy code</button></div><p class="tiny mut" style="margin-top:12px">Testing alone? Join with this code yourself, then switch sides.</p></section>`;
   if(s==='consent') return consentPanel(d, role);
   if(s==='pleadings') return pleadPanel(d, role);
@@ -893,7 +893,7 @@ function consentPanel(d, role){
    ${dr.card?`<div class="file"><span>${ICON.card}Visa ending 4242 <span class="tag navy">Test card</span></span><button class="linkbtn" data-act="rmcard">Remove</button></div>`:`<button class="btn ghost" data-act="addcard" style="margin-top:4px">${ICON.card}Add a test card</button><p class="tiny mut">Prototype: no real card is collected. In production, Stripe saves the card with consent to charge it later and pays out through Stripe Connect.</p>`}`;
   html+=`<label class="chk"><input type="checkbox" data-bind="draft.${k}.c1" ${dr.c1?'checked':''}> I voluntarily agree to submit this dispute to an AI arbitrator and to be bound by these terms.</label>
    <label class="chk"><input type="checkbox" data-bind="draft.${k}.c2" ${dr.c2?'checked':''}> I understand the AI decides only on what the parties submit, and that my filings are shared with the other side once both have filed.</label>
-   ${bind?`<label class="chk"><input type="checkbox" data-bind="draft.${k}.c3" ${dr.c3?'checked':''}> I waive a court or jury trial on this dispute and authorize CasePulse to charge my card for any award against me, up to the cap.</label>`:''}
+   ${bind?`<label class="chk"><input type="checkbox" data-bind="draft.${k}.c3" ${dr.c3?'checked':''}> I waive a court or jury trial on this dispute and authorize The Bench by Pointed Discovery to charge my card for any award against me, up to the cap.</label>`:''}
    <div class="grid">${field('Type your full legal name to sign',`draft.${k}.sig`)}<div></div></div>
    <button class="btn primary" style="margin-top:14px" data-act="signConsent">Sign consent</button></section>`;
   return html;
@@ -937,7 +937,7 @@ function rulingPanel(d, role){
   const dec=r.decision||{}, bind=d.agreed?.ruleType==='binding', amt=num(dec.award_amount);
   const payer=dec.payer, payee=payer==='respondent'?'claimant':payer==='claimant'?'respondent':null;
   let h=`<article class="award">
-    <div class="court">The Bench, CasePulse by Pointed Discovery</div>
+    <div class="court">The Bench by Pointed Discovery</div>
     <h2>${bind?'Arbitration Award':'Advisory Ruling'}</h2>
     <div class="vs">${esc(d.parties.claimant.name)}, claimant, v. ${esc(d.parties.respondent.name)}, respondent</div>
     <div class="amount"><span class="fig">${amt&&payer!=='none'?money(amt):'No award'}</span>

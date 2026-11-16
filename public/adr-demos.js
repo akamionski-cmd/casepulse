@@ -1,4 +1,4 @@
-/* CasePulse AI Judge demo disputes — all people and businesses are fictional. */
+/* The Bench (by Pointed Discovery) AI Judge demo disputes — all people and businesses are fictional. */
 window.ADR_DEMOS = [
 { id:'remodel', label:'Contractor vs. homeowner — unpaid remodel invoice', title:'Unpaid final invoice — kitchen remodel', category:'Services / workmanship', state:'Illinois', amount:8400, counter:3000, cap:8400,
   summary:'Contractor seeks the final 20% payment on a $42,000 kitchen remodel. Homeowner withheld it, citing defective cabinet doors and a 3-week delay.',

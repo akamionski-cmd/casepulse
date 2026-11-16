@@ -1,7 +1,7 @@
 {
-  "name": "casepulse",
+  "name": "the-bench",
   "private": true,
   "type": "module",
-  "description": "CasePulse by Pointed Discovery: pre-suit claim valuation and The Bench AI arbitration demo",
+  "description": "The Bench by Pointed Discovery: pre-suit claim valuation and AI arbitration (Bench Ruling)",
   "engines": { "node": ">=20" }
 }

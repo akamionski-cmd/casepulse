@@ -1,4 +1,4 @@
-/* CasePulse demo cases — all parties, people, firms and judges are fictional. */
+/* The Bench (by Pointed Discovery) demo cases — all parties, people, firms and judges are fictional. */
 window.DEMOS = [
 { id:'pi-auto', f:{ practice:'Personal injury / auto', side:'insurer', caseType:'Delgado v. Brennan — rear-end collision, cervical fusion', venue:'Cook County Circuit Court, Law Division', judge:'Hon. R. Albright (fictional)', trier:'jury', posture:'discovery', opp:'Halvorsen Injury Group — volume PI firm, tries 2–3 cases/yr', parties:'Plaintiff Ana Delgado; defendant driver Tom Brennan (insured, $250k BI policy)',
   claims:'Negligence; negligence per se (following too closely).',

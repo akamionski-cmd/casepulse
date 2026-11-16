@@ -1,4 +1,4 @@
-// Shared helpers for the CasePulse API routes (files starting with "_" are not routes on Vercel).
+// Shared helpers for the The Bench (by Pointed Discovery) API routes (files starting with "_" are not routes on Vercel).
 
 export const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5';
 const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;

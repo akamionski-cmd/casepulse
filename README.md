@@ -1,4 +1,4 @@
-# CasePulse by Pointed Discovery
+# The Bench by Pointed Discovery
 
 Public demo site for two tools:
 
