@@ -52,17 +52,38 @@ export async function claude({ system, messages, tools, maxTokens = 6000 }){
   return j;
 }
 export const textOf = j => (j.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
+function repairJSON(x){
+  return x
+    .replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'")
+    .replace(/,\s*([}\]])/g, '$1');
+}
 export function parseJSON(t){
   const s = String(t || '');
   const fence = s.match(/```(?:json)?\s*([\s\S]*?)```/);
   const src = fence ? fence[1] : s;
   const a = src.indexOf('{'), b = src.lastIndexOf('}');
-  if(a < 0 || b < a) throw new HttpError(502, 'The AI did not return a structured answer. Try again.');
-  return JSON.parse(src.slice(a, b + 1));
+  if(a < 0 || b < a) return null;
+  const slice = src.slice(a, b + 1);
+  try { return JSON.parse(slice); } catch {}
+  try { return JSON.parse(repairJSON(slice)); } catch {}
+  return null;
 }
 export async function askJSON(prompt, maxTokens){
-  const j = await claude({ messages:[{ role:'user', content: prompt }], maxTokens });
-  return parseJSON(textOf(j));
+  let j = await claude({ messages:[{ role:'user', content: prompt }], maxTokens });
+  let text = textOf(j);
+  let out = parseJSON(text);
+  if(out) return out;
+  console.error('askJSON parse failed', { stop: j.stop_reason, len: text.length, head: text.slice(0, 300), tail: text.slice(-300) });
+  // One retry: more room, stricter format instruction.
+  const strict = prompt + '\n\nIMPORTANT: Reply with ONE valid JSON object only. No markdown fences, no commentary, no trailing commas. Keep every text field short so the whole object fits.';
+  j = await claude({ messages:[{ role:'user', content: strict }], maxTokens: Math.min(Math.round(maxTokens * 1.5), 12000) });
+  text = textOf(j);
+  out = parseJSON(text);
+  if(out) return out;
+  console.error('askJSON retry failed', { stop: j.stop_reason, len: text.length, tail: text.slice(-300) });
+  throw new HttpError(502, j.stop_reason === 'max_tokens'
+    ? 'The analysis ran too long to finish. Try again, or trim the facts and documents.'
+    : 'The AI returned an answer we could not read. Try again.');
 }
 
 /* ---------- misc ---------- */

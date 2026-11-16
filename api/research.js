@@ -85,7 +85,7 @@ export default handler(async (req) => {
   if(final === null) throw new HttpError(502, 'Research did not finish. Try again.');
 
   let r;
-  try{ r = parseJSON(final); }catch{ return { sources, data:null, err:'Research came back in an unreadable form. The valuation will run without it.' }; }
+  r = parseJSON(final); if(!r){ return { sources, data:null, err:'Research came back in an unreadable form. The valuation will run without it.' }; }
   const ok = u => u && seen.has(baseUrl(u));
   const comparables = (Array.isArray(r.comparables) ? r.comparables : []).filter(x => x && ok(x.url)).slice(0, 6);
   const news = (Array.isArray(r.news) ? r.news : []).filter(x => x && ok(x.url)).slice(0, 4);

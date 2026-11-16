@@ -11,13 +11,13 @@ export default handler(async (req) => {
   switch(b.task){
     case 'value':
       if(!b.input || typeof b.input !== 'object') throw new HttpError(400, 'Missing case input.');
-      return { result: await askJSON(valuePrompt(b), 6000) };
+      return { result: await askJSON(valuePrompt(b), 9000) };
     case 'questions':
       if(!b.dispute) throw new HttpError(400, 'Missing dispute.');
       return { result: await askJSON(questionsPrompt(b.dispute), 1500) };
     case 'ruling':
       if(!b.dispute) throw new HttpError(400, 'Missing dispute.');
-      return { result: await askJSON(rulingPrompt(b.dispute), 5000) };
+      return { result: await askJSON(rulingPrompt(b.dispute), 7000) };
     case 'answers':
       return { result: await askJSON(answersPrompt(b), 1200) };
     default:
